@@ -17,8 +17,8 @@ Tous les itens suivantes, sont necessaires pour l'installations dans une machine
 
 * Item [Java JDK 1.7](https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
 * Item [Maven](https://maven.apache.org/)
-- Item NetBeans 7.4
-- Item [Unreal Tournament 2004](https://store.steampowered.com/app/13230/Unreal_Tournament_2004_Editors_Choice_Edition/)
+* Item NetBeans 7.4
+* Item [Unreal Tournament 2004](https://store.steampowered.com/app/13230/Unreal_Tournament_2004_Editors_Choice_Edition/)
 * Item [Pogamut](http://pogamut.cuni.cz/main/tiki-index.php) 
 
 ## Implementation
@@ -29,18 +29,38 @@ Dans cette section, nous expliquerons comment a été le développement de notre
 
 L'automate à états qui nous avons developpé ce trouve ci-dessous.
 
-
-<!--![Machine](https://github.com/PauloFavero/Java-Projects/blob/master/Bot_States.png?raw=false  "Machine à état")-->
-
 <img src="https://github.com/PauloFavero/Java-Projects/blob/master/Bot_States.png" width="400" height="400" />
 
+Chaque état possède ses respectives transitions de sortie organisé par ordre de priorité.
 
+L'exemple ci-dessous, nous montre les transitions associé à l'état *Attack*. 
 
 ```
-Give an example
+    public AttackState() {
+        transitions = new Transition[4];
+        transitions[0] = new TransitionToPursue();
+        transitions[1] = new TransitionToHurted();
+        transitions[2] = new TransitionToAttack();
+        transitions[3] = new TransitionToSearch();
+    }
 ```
 
-### And coding style tests
+La machine à états a pour rôle de verifier le transitions qui appartient à l'état actuel et changer d'état si la condition pour la transition est vrai. Cette verification est effectué par la methode *execute* de la machine à état.
+
+```
+public void execute(HunterBot Bot) {
+        for(int i = 0; i < this.currentState.getTransitions().length; i++){
+            HunterState hs = this.currentState.getTransitions()[i].transition(Bot);
+            if(hs != null){
+                this.currentState = hs;
+                break;
+            }
+        }
+    }
+ ```
+ La structure ci-dessus nous permet à facilement d'ajouter de transitions et états au fur et à mesure. Il suffit juste d'ajouter des transitions si necessaire à un état correspondant.
+
+### Diagramme de classes du bot
 
 Explain what these tests test and why
 
