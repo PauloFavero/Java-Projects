@@ -45,7 +45,7 @@ L'exemple ci-dessous, nous montre les transitions associé à l'état *Attack*.
     }
 ```
 
-La machine à états a pour rôle de verifier le transitions qui appartient à l'état actuel et changer d'état si la condition pour la transition est vrai. Cette verification est effectué par la methode *execute* de la machine à état.
+La machine à états a pour rôle de verifier le transitions qui appartient à l'état actuel et à changer d'état si la condition pour la transition est vrai. Cette verification est effectué par la methode *execute* de la machine à état.
 
 ```
 public void execute(HunterBot Bot) {
@@ -62,11 +62,15 @@ public void execute(HunterBot Bot) {
 
 ### Diagramme de classes du bot
 
-Explain what these tests test and why
+Nous nous asservissons du patron de conception *[State](https://sourcemaking.com/design_patterns/state)* et en plus d'une interface pour gerer les transitions. 
 
-```
-Give an example
-```
+L'image ci-dessous exemplifique notre patron de conception que fait notre bot tourner. 
+
+<img src="https://github.com/PauloFavero/Java-Projects/blob/master/Pogamut%20Hunter%20Bot/readme_El_Matador/Bot_UML.png" width="400" height="400" />
+
+### Améliorations
+
+TODO
 
 ## Deployment
 
