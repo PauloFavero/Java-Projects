@@ -35,7 +35,7 @@ Chaque état possède ses respectives transitions de sortie organisé par ordre 
 
 L'exemple ci-dessous, nous montre les transitions associé à l'état *Attack*. 
 
-```
+```java
     public AttackState() {
         transitions = new Transition[4];
         transitions[0] = new TransitionToPursue();
@@ -47,7 +47,7 @@ L'exemple ci-dessous, nous montre les transitions associé à l'état *Attack*.
 
 La machine à états a pour rôle de verifier le transitions qui appartient à l'état actuel et à changer d'état si la condition pour la transition est vrai. Cette verification est effectué par la methode *execute* de la machine à état.
 
-```
+```java
 public void execute(HunterBot Bot) {
         for(int i = 0; i < this.currentState.getTransitions().length; i++){
             HunterState hs = this.currentState.getTransitions()[i].transition(Bot);
@@ -70,7 +70,11 @@ L'image ci-dessous exemplifique notre patron de conception que fait notre bot to
 
 ### Améliorations
 
-TODO
+Au début, nous avons créé un état supplementaire nommé *SwitchBestWeapon*. Cet état a pour rôle de donner au bot le savoir de choisir la meilleur arme parmi les deux classes d'armes: \textit{Range} et \textit{Melee}.
+
+Dès qu'il aperçoit l'ennemie, il calcule la distance pour savoir déterminer la meilleur classe d'arme en rapport à la distance. Une fois qu'il a choisi la classe, le changement se donne de façon aléatoire.
+
+Au bout dans moment, nous avons rendu compte qu'il avait déjà une méthode dans le bot qui travaille pour trouver la meilleur arme dans le moment du tir. Ce choix est fait basé sur des préferences d'arme avec un rapport de distance au moment de la création du bot.
 
 ## Deployment
 
